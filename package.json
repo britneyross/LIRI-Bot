@@ -2,7 +2,7 @@
   "name": "liri-node-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "keys.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,11 +10,16 @@
     "type": "git",
     "url": "git+https://github.com/britneyross/liri-node-app.git"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/britneyross/liri-node-app/issues"
   },
-  "homepage": "https://github.com/britneyross/liri-node-app#readme"
+  "homepage": "https://github.com/britneyross/liri-node-app#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "fs": "0.0.1-security",
+    "moment": "^2.27.0",
+    "node-spotify-api": "^1.1.1"
+  }
 }
