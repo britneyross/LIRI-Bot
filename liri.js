@@ -22,10 +22,10 @@ if (userInput == "concert-this") {
 } else if (userInput == "do-what-it-says") {
     doThis();
 } else {
-    console.log(`\n******************************************************\n`)
+    console.log(`\n-----------------------------------------------------\n`)
     console.log(`\n   Try these commands: `)
     console.log(`\n   concert-this\n   spotify-this-song\n   movie-this\n   do-what-it-says\n  `)
-    console.log(`\n******************************************************`)
+    console.log(`\n-----------------------------------------------------`)
 }
 
 function spotifyThis() {
@@ -45,13 +45,13 @@ function spotifyThis() {
         for (var i = 0; i < 3; i++) {
             var track = response.tracks.items[i];
 
-            console.log(`\n******************************************************\n`)
+            console.log(`\n-----------------------------------------------------\n`)
             console.log(`   Artist/Band: ${track.artists[0].name}`)
             console.log(`   Song: ${track.name}`)
             console.log(`   Preview Song: ${track.external_urls.spotify}`)
             console.log(`   Album: ${track.album.name}`)
         };
-        console.log(`\n******************************************************`)
+        console.log(`\n-----------------------------------------------------`)
 
     });
 };
@@ -64,7 +64,7 @@ function concertThis() {
     }
 
     var queryUrl = "https://rest.bandsintown.com/artists/" + search + "/events?app_id=codingbootcamp";
-    console.log(queryUrl);
+    //console.log(queryUrl);
 
     axios.get(queryUrl).then(
         function (response) {
@@ -72,15 +72,20 @@ function concertThis() {
             //console.log(response.data)
             var concert = response.data;
 
+            if (!concert.length) {
+                console.log("No results found for " + search);
+                return;
+              }
+
             if (concert.length > 3) {
                 for (var i = 0; i < 3; i++) {
-                    console.log(`\n******************************************************\n`)
+                    console.log(`\n-----------------------------------------------------\n`)
                     console.log(`   Artist/Band: ${concert[i].lineup[0]}`)
                     console.log(`   Date: ${moment(concert[i].datetime).format("MM/DD/YYYY")}`)
                     console.log(`   Location: ${concert[i].venue.city}, ${concert[i].venue.region}`)
                     console.log(`   Venue: ${concert[i].venue.name}`)
                 };
-                console.log(`\n******************************************************`)
+                console.log(`\n-----------------------------------------------------`)
             } else {
                 for (var i = 0; i < concert.length; i++) {
                     console.log(`   Artist/Band: ${concert[i].lineup[0]}`)
@@ -88,10 +93,41 @@ function concertThis() {
                     console.log(`   Location: ${concert[i].venue.city}, ${concert[i].venue.region}`)
                     console.log(`   Venue: ${concert[i].venue.name}`)
                 };
-                console.log(`\n******************************************************`)
+                console.log(`\n-----------------------------------------------------`)
             }
         }
     );
+};
+
+function movieThis() {
+
+    //default 
+    if (!search) {
+        search = "pulp+fiction"
+    }
+
+    var queryUrl = "http://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=trilogy";
+    //console.log(queryUrl);
+
+    axios.get(queryUrl)
+        .then(function (response) {
+            // console.log(response.data);
+            var movie = response.data;
+
+            console.log(`\n-----------------------------------------------------\n`)
+            console.log(`   Title: ${movie.Title} `)
+            console.log(`   Year: ${movie.Year} `)
+            console.log(`   IMBD Rating: ${movie.Ratings[0].Value}`)
+            console.log(`   Rotten Tomatoes Rating: ${movie.Ratings[1].Value}`)
+            console.log(`   Country: ${movie.Country}`)
+            console.log(`   Language: ${movie.Language}`)
+            console.log(`   Plot: ${movie.Plot}`)
+            console.log(`   Actors: ${movie.Actors}`)
+            console.log(`\n-----------------------------------------------------`)
+        })
+        .catch(function (error) {
+            console.log(error)
+        });
 };
 
 function doThis() {
@@ -102,12 +138,30 @@ function doThis() {
             return console.log(error);
         }
 
-        //console.log(response);
+        var listOfCommands = response.split(",");
 
-        //var textArray = response.split(",");
+        /*
+        var randomIndex =  Math.floor(Math.random() * listOfCommands.length);
+        console.log(randomIndex);
 
-        //console.log(`\n\n` + userInput, search);
+        if (listOfCommands[randomIndex] != "spotify-this-song"){
+            let currentCommand = listOfCommands[randomIndex - 1];
+            let currentSearch = listOfCommands[randomIndex];
 
+            switch (currentCommand){
+                case "spotify-this-song":
+                // run the spotify function with the currentSearch variable 
+            }
+        } else {
+            let currentCommand = listOfCommands[randomIndex];
+            let currentSearch = listOfCommands[randomIndex + 1];
+            switch (currentCommand){
+                case "spotify-this-song":
+                // run the sportify function with the currentSearch variable 
+            }
 
-    })
+        } 
+*/
+
+    });
 };
