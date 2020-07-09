@@ -137,31 +137,11 @@ function doThis() {
         if (error) {
             return console.log(error);
         }
-
-        var listOfCommands = response.split(",");
-
-        /*
-        var randomIndex =  Math.floor(Math.random() * listOfCommands.length);
-        console.log(randomIndex);
-
-        if (listOfCommands[randomIndex] != "spotify-this-song"){
-            let currentCommand = listOfCommands[randomIndex - 1];
-            let currentSearch = listOfCommands[randomIndex];
-
-            switch (currentCommand){
-                case "spotify-this-song":
-                // run the spotify function with the currentSearch variable 
-            }
-        } else {
-            let currentCommand = listOfCommands[randomIndex];
-            let currentSearch = listOfCommands[randomIndex + 1];
-            switch (currentCommand){
-                case "spotify-this-song":
-                // run the sportify function with the currentSearch variable 
-            }
-
-        } 
-*/
+     
+        var command = response.split(",");
+        if (command[0] == "spotify-this-song"){
+            spotifyThis(command[1]);
+        }
 
     });
 };
