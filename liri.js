@@ -19,12 +19,10 @@ if (userInput == "concert-this") {
     spotifyThis()
 } else if (userInput == "movie-this") {
     movieThis();
-} else if (userInput == "do-what-it-says") {
-    doThis();
 } else {
     console.log(`\n-----------------------------------------------------\n`)
     console.log(`\n   Try these commands: `)
-    console.log(`\n   concert-this\n   spotify-this-song\n   movie-this\n   do-what-it-says\n  `)
+    console.log(`\n   concert-this\n   spotify-this-song\n   movie-this\n `)
     console.log(`\n-----------------------------------------------------`)
 }
 
@@ -130,20 +128,4 @@ function movieThis() {
         });
 };
 
-//TODO: prevent default spotifyThis action
 
-function doThis() {
-
-    fs.readFile("random.txt", "utf8", function (error, response) {
-
-        if (error) {
-            return console.log(error);
-        }
-     
-        var command = response.split(",");
-        if (command[0] == "spotify-this-song"){
-            spotifyThis(command[1]);
-        }
-
-    });
-};
