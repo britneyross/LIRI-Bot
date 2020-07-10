@@ -130,6 +130,8 @@ function movieThis() {
         });
 };
 
+//TODO: prevent default spotifyThis action
+
 function doThis() {
 
     fs.readFile("random.txt", "utf8", function (error, response) {
