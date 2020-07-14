@@ -6,7 +6,6 @@ var Spotify = require("node-spotify-api");
 
 var axios = require("axios");
 var moment = require("moment");
-var fs = require("fs");
 
 var spotify = new Spotify(keys.spotify);
 
@@ -19,10 +18,12 @@ if (userInput == "concert-this") {
     spotifyThis()
 } else if (userInput == "movie-this") {
     movieThis();
+} else if (userInput == "do-what-it-says") {
+    doThis();
 } else {
     console.log(`\n-----------------------------------------------------\n`)
     console.log(`\n   Try these commands: `)
-    console.log(`\n   concert-this\n   spotify-this-song\n   movie-this\n `)
+    console.log(`\n   concert-this\n   spotify-this-song\n   movie-this\n   do-what-it-says\n  `)
     console.log(`\n-----------------------------------------------------`)
 }
 
